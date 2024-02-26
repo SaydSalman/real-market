@@ -11,7 +11,7 @@ function ListingItem({listing}) {
                 <Link style={{textDecoration:'none'}} to={`/listing/${listing._id}`}>
                 <Card className='shadow' style={{ width: '18rem',height:'26rem' }}>
               <Card.Img style={{width:'18rem'}} variant="top" src={listing.imageUrls[0] || "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg"} />
-              <Card.Body className='p-3'>
+              <Card.Body style={{height:'20rem'}} className='p-3'>
                 <Card.Title className='text-truncate'>{listing.name}</Card.Title>
                 <Card.Text className='d-flex align-items-center gap-2'>
                 <FaLocationDot style={{width:'20px',height:'20px',color:'green'}} />

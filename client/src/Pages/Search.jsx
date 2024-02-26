@@ -176,7 +176,7 @@ function Search() {
                 <div className='d-grid w-75  mt-3'><button className='btn btn-secondary'>Search</button></div>
             </form>
         </div>
-        <div className="col-lg-8 p-5">
+        <div className="col-lg-8 p-5 ">
     <h4>Listing Results:</h4>
     
         
@@ -187,7 +187,7 @@ function Search() {
                 <p className=' text-secondary'>loading...</p>
             )}
             
-                <div className='row'>
+                <div className='row d-flex justify-content-center align-items-center '>
                     {!loading &&
                         listings &&
                         listings.map((listing) => (

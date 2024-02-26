@@ -1,63 +1,73 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import {Swiper,SwiperSlide} from 'swiper/react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
-import {Navigation} from "swiper/modules"
-import 'swiper/css/bundle'
-import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking, FaShare } from 'react-icons/fa';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css/bundle';
+import {
+  FaBath,
+  FaBed,
+  FaChair,
+  
+  FaMapMarkerAlt,
+  FaParking,
+  FaShare,
+} from 'react-icons/fa';
 import Contact from '../components/Contact';
 
 
 
+export default function Listing() {
+  SwiperCore.use([Navigation]);
+  const [listing, setListing] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [contact, setContact] = useState(false);
+  const params = useParams();
+  const { currentUser } = useSelector((state) => state.user);
 
-function ViewLists() {
-    SwiperCore.use([Navigation])
-    const params = useParams()
-    const [listing,setListing] = useState(null)
-    const [loading,setLoading] = useState(true)
-    const [error,setError] = useState(false)
-    const [contact,setContact] = useState(false)
-    const [copied, setCopied] = useState(false);
-    useEffect(()=>{
-        const fetchListing =async ()=>{
-            try {
-                setLoading(true)
-                const res = await fetch(`/api/listing/get/${params.listingId}`)
-            const data =await res.json()
-            if(data.success == false){
-                setError(true)
-                setLoading(false)
-                return
-            }
-            setListing(data)
-            setLoading(false)
-            setError(false)
-            } catch (error) {
-                setError(true)
-                setLoading(false)
-            }
+  useEffect(() => {
+    const fetchListing = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/listing/get/${params.listingId}`);
+        const data = await res.json();
+        if (data.success === false) {
+          setError(true);
+          setLoading(false);
+          return;
         }
-        fetchListing()
-    },[params.listingId])
-    console.log(listing);
-    const {currentUser} = useSelector((state)=>state.user)
+        setListing(data);
+        setLoading(false);
+        setError(false);
+      } catch (error) {
+        setError(true);
+        setLoading(false);
+      }
+    };
+    fetchListing();
+  }, [params.listingId]);
+
   return (
     <main>
-     {loading && <p className='text-center'>loading...</p>}
-     {error && <p className='text-center'>Something went wrong...</p>}
-     {listing && !loading && !error && (
-      <div>
-        <Swiper navigation>
-          {listing.imageUrls.map((url)=>(
-            <SwiperSlide key={url}>
-              <div style={{width:'100%',height:'500px',border:'1px solid'}}>
-              <img src={url} alt={listing.name} style={{width:'100%' , height: 'auto' }}/>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <div className='fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer'>
+      {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
+      {error && (
+        <p className='text-center my-7 text-2xl'>Something went wrong!</p>
+      )}
+      {listing && !loading && !error && (
+        <div>
+          <Swiper navigation>
+            {listing.imageUrls.map((url) => (
+              <SwiperSlide key={url}>
+                <div style={{width:'100%',height:'90vh',border:'1px solid'}}>
+                  <img src={url} alt="" style={{width:'100%',height:'80vh'}} />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className='  '>
             <FaShare
               className='text-slate-500'
               onClick={() => {
@@ -74,64 +84,66 @@ function ViewLists() {
               Link copied!
             </p>
           )}
-          <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4'>
-            <p className='text-2xl font-semibold'>
+          <div className='p-5'>
+            <p className='text-2xl fw-bold'>
               {listing.name} - ${' '}
               {listing.offer
                 ? listing.discountPrice.toLocaleString('en-US')
                 : listing.regularPrice.toLocaleString('en-US')}
               {listing.type === 'rent' && ' / month'}
             </p>
-            <p className='flex items-center mt-6 gap-2 text-slate-600  text-sm'>
-              <FaMapMarkerAlt className='text-green-700' />
+            <p className='d-flex items-center mt-6 gap-2 '>
+              <FaMapMarkerAlt className='text-success' />
               {listing.address}
             </p>
             <div className='d-flex gap-4'>
-              <p className='bg-danger w-50 rounded text-center'>{listing.type === 'rent' ? 'For Rent' : 'For Sale'}</p>
+              <p className='bg-danger w-50 rounded text-center'>
+                {listing.type === 'rent' ? 'For Rent' : 'For Sale'}
+              </p>
               {listing.offer && (
-                <p className='bg-success w-50 rounded text-center'>${+listing.regularPrice- +listing.discountPrice} offer</p>
+                <p className='bg-success w-50 rounded text-center'>
+                  ${+listing.regularPrice - +listing.discountPrice} OFF
+                </p>
               )}
             </div>
-            </div>
-            <p className='m-3 w-75'><span className='fw-bolder'>Description:</span> {listing.description}</p>
+            <p className=' '>
+              <span className='fw-bolder'>Description - </span>
+              {listing.description}
+            </p>
             <ul className='list-unstyled m-5 d-flex gap-4'>
-              <li >
-                <FaBed>
-                  {listing.bedrooms>1 ? `${listing.bedrooms} beds`:`${listing.bedrooms} bed`}
-                </FaBed>
+              <li className=' '>
+                <FaBed className='text-lg' />
+                {listing.bedrooms > 1
+                  ? `${listing.bedrooms} beds `
+                  : `${listing.bedrooms} bed `}
               </li>
-              <li >
-                <FaBath>
-                  {listing.bathrooms>1 ? `${listing.bathrooms} bathrooms`:`${listing.bathrooms} bathroom`}
-                </FaBath>
+              <li className='flex items-center gap-1 whitespace-nowrap '>
+                <FaBath className='text-lg' />
+                {listing.bathrooms > 1
+                  ? `${listing.bathrooms} baths `
+                  : `${listing.bathrooms} bath `}
               </li>
-              <li >
-                <FaParking>
-                  {listing.parking ? 'Parking Spot':'No Parking'}
-                </FaParking>
+              <li className='flex items-center gap-1 whitespace-nowrap '>
+                <FaParking className='text-lg' />
+                {listing.parking ? 'Parking spot' : 'No Parking'}
               </li>
-              <li >
-                <FaChair>
-                  {listing.furnished ? 'furnished' : "not furnished"}
-                  
-                </FaChair>
+              <li className='flex items-center gap-1 whitespace-nowrap '>
+                <FaChair className='text-lg' />
+                {listing.furnished ? 'Furnished' : 'Unfurnished'}
               </li>
             </ul>
-            {currentUser && listing.userRef!==currentUser._id&& !contact&&(
-              <div className="row">
-              <div className="col-lg-12 text-center">
-                <div>
-                  <button onClick={()=>setContact(true)} className='btn btn-secondary'>Contact Landlord</button>
-                </div>
-              </div>
-            </div>
-            )
-              }
-              {contact && <Contact listing={listing}/>}
-      </div>
-     )}
+            {currentUser && listing.userRef !== currentUser._id && !contact && (
+              <button
+                onClick={() => setContact(true)}
+                className='btn btn-success'
+              >
+                Contact landlord
+              </button>
+            )}
+            {contact && <Contact listing={listing} />}
+          </div>
+        </div>
+      )}
     </main>
-  )
+  );
 }
-
-export default ViewLists

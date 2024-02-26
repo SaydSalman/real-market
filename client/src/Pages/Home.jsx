@@ -51,7 +51,7 @@ function Home() {
     <div className='container'>
       <div className="row">
         <div className="col-lg-6 d-flex justify-content-center align-items-center flex-column" style={{minHeight:'50vh'}}>
-        <h1>Find Your Next Perfect <br />Place with Ease</h1>
+        <h1 style={{height:'100px'}}>Find Your Next Perfect <br />Place with Ease</h1>
         <span className='ms-auto'>Sahand Estate will help you to  find your dream place in a few steps.</span><br/><br/>
         <div >
           <a className='btn btn-warning'><Link style={{textDecoration:'none' ,color:'black'}} to={'/search'}>Lets Start Now...</Link></a>
@@ -66,7 +66,7 @@ function Home() {
       <Swiper Navigation>
         {offerListings && offerListings.length >0 && offerListings.map((listing)=>(
   
-         <SwiperSlide key={listing._id}> <div style={{width:'100%'}}><img src={listing.imageUrls[0]} alt="" /></div></SwiperSlide>
+         <SwiperSlide key={listing._id}> <div style={{width:'100%'}}><img src={listing.imageUrls[0]} style={{width:'100%',height:'100vh'}} alt="" /></div></SwiperSlide>
         ))}
       </Swiper>
     </div>

@@ -142,7 +142,7 @@ function Listing() {
              <div className='d-flex justify-content-between'>
               <div className='d-flex gap-2'>
                 <input type="checkbox" id='sale' className='' onChange={handleChange} checked={formData.type==="sale"} />
-                <span>Sail</span>
+                <span>Sale</span>
               </div>
               <div className='d-flex gap-2'>
                 <input type="checkbox" id='rent' className='' onChange={handleChange} checked={formData.type==="rent"} />

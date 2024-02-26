@@ -11,16 +11,15 @@ function Footer() {
               <div className='d-flex flex-column justify-content-center align-items-center'>
                 <h4 style={{ height: '30px' }}>Real Estate</h4>
                 <span>Designed and built with all the love in the world by  Luminar team with the help of our contributors</span>
-                <span className='mt-1'>Code Licensed Luminar,done CC BY 3.0</span>
-                <span className='mt-1 mb-2'>Currently v1.0.0</span>
+                
               </div>
             </div>
             <div className="col-lg-3 ">
               <h4 className='ms-3 text-center' style={{ height: '30px' }}>Links</h4>
               <ul className='list-unstyled'>
                 <li className='text-center '><Link style={{ textDecoration: 'none',color:'black' }} to={'/'}>Home</Link></li>
-                <li className='text-center'><Link style={{ textDecoration: 'none',color:'black' }} to={'/view'}>View</Link></li>
-                <li className='text-center'><Link style={{ textDecoration: 'none',color:'black' }} to={'/listing'}>list</Link></li>
+                <li className='text-center'><Link style={{ textDecoration: 'none',color:'black' }} to={'/search'}>Search</Link></li>
+                <li className='text-center'><Link style={{ textDecoration: 'none',color:'black' }} to={'/about'}>About</Link></li>
               </ul>
             </div>
             <div className="col-lg-3">
@@ -51,7 +50,7 @@ function Footer() {
           </div>
           <div className="row">
             <div className='text-center mt-2'>
-              <span>Copyright @ 2023 E cart .Built with React</span>
+              <span>Copyright @ <span className='fw-bolder'>2024 REAL ESTATE</span> .Built with React</span>
             </div>
           </div>
         </div>
