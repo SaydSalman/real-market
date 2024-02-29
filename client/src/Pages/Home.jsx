@@ -52,7 +52,7 @@ function Home() {
       <div className="row">
         <div className="col-lg-6 d-flex justify-content-center align-items-center flex-column" style={{minHeight:'50vh'}}>
         <h1 style={{height:'100px'}}>Find Your Next Perfect <br />Place with Ease</h1>
-        <span className='ms-auto'>Sahand Estate will help you to  find your dream place in a few steps.</span><br/><br/>
+        <span className='ms-auto'>Realty will help you to  find your dream place in a few steps.</span><br/><br/>
         <div >
           <a className='btn btn-warning'><Link style={{textDecoration:'none' ,color:'black'}} to={'/search'}>Lets Start Now...</Link></a>
         </div>

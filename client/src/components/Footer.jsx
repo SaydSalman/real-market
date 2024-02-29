@@ -10,7 +10,7 @@ function Footer() {
             <div className="col-lg-3">
               <div className='d-flex flex-column justify-content-center align-items-center'>
                 <h4 style={{ height: '30px' }}>Real Estate</h4>
-                <span>Designed and built with all the love in the world by  Luminar team with the help of our contributors</span>
+                <span>Designed and built with all the love in the world by  Realty team with the help of our contributors</span>
                 
               </div>
             </div>
@@ -50,7 +50,7 @@ function Footer() {
           </div>
           <div className="row">
             <div className='text-center mt-2'>
-              <span>Copyright @ <span className='fw-bolder'>2024 REAL ESTATE</span> .Built with React</span>
+              <span>Copyright @ <span className='fw-bolder'>2024 Realty Hub</span> .Built with React</span>
             </div>
           </div>
         </div>
